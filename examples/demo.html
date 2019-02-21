@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>Hijri/Gregorian Datepicker Demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="ZulNs">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="copyright" content="ZulNs">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<!--link rel="icon" href="favicon.png" type="image/png" /-->
+<!--link rel="icon" href="favicon.ico" type="image/x-icon" /-->
+</head>
+<body>
+<link rel="stylesheet" href="../libs/w3css/w3.css"/>
+<script type="text/javascript" src="../libs/hijri-date.js"></script>
+<script type="text/javascript" src="../libs/datepicker.js"></script>
+<style type="text/css">
+.w3-bar-item{border-left:6px solid transparent!important}
+.w3-bar-item:not(:disabled):hover{border-color:#f44336!important}
+.w3-bar-item:focus{border-color:#2196F3!important}
+.w3-bar-item.expanded{color:#fff;background-color:#616161}
+button.collapsed + div,button.collapsed>:nth-child(3),button.expanded>:nth-child(2){display:none!important}
+</style>
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:220px;z-index:2" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-ripple w3-large w3-hide-large" onclick="closeSidebar()">Close<span class="w3-right">&times;</span></button>
+  <button class="w3-bar-item w3-button w3-ripple collapsed" onclick="dropdown(this)">
+		<span>Set Language</span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 3L5 7L9 3Z"/></svg></span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 7L5 3L9 7Z"/></svg></span>
+	</button>
+		<div class="w3-bar-block w3-light-grey">
+			<div class="w3-bar-item w3-button" onclick="selectLang(this)">
+				<input id="langEn" class="w3-radio" type="radio" name="lang" value="en" checked>
+				<label for="langEn">English</label>
+			</div>
+			<div class="w3-bar-item w3-button" onclick="selectLang(this)">
+				<input id="langAr" class="w3-radio" type="radio" name="lang" value="ar">
+				<label for="langAr">Arabic</label>
+			</div>
+			<div class="w3-bar-item w3-button" onclick="selectLang(this)">
+				<input id="langId" class="w3-radio" type="radio" name="lang" value="id">
+				<label for="langId">Indonesian</label>
+			</div>
+		</div>
+  <button class="w3-bar-item w3-button w3-ripple collapsed" onclick="dropdown(this)">
+		<span>Set Firstday</span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 3L5 7L9 3Z"/></svg></span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 7L5 3L9 7Z"/></svg></span>
+	</button>
+		<div class="w3-bar-block w3-light-grey">
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setFirstDay(0)">Sunday</button>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setFirstDay(1)">Monday</button>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setFirstDay(2)">Tuesday</button>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setFirstDay(3)">Wednesday</button>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setFirstDay(4)">Thursday</button>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setFirstDay(5)">Friday</button>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setFirstDay(6)">Saturday</button>
+		</div>
+  <button class="w3-bar-item w3-button w3-ripple collapsed" onclick="dropdown(this)">
+		<span>Set Full Year</span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 3L5 7L9 3Z"/></svg></span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 7L5 3L9 7Z"/></svg></span>
+	</button>
+		<div class="w3-bar-block w3-light-grey">
+			<div class="w3-bar-item">
+				<input id="valYear" class="w3-input w3-border" type="text" placeholder="full year value...">
+			</div>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setYear()">Apply</button>
+		</div>
+  <button class="w3-bar-item w3-button w3-ripple collapsed" onclick="dropdown(this)">
+		<span>Set Month</span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 3L5 7L9 3Z"/></svg></span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 7L5 3L9 7Z"/></svg></span>
+	</button>
+		<div class="w3-bar-block w3-light-grey">
+			<div class="w3-bar-item">
+				<input id="valMonth" class="w3-input w3-border" type="text" placeholder="month value...">
+			</div>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setMonth()">Apply</button>
+		</div>
+  <button class="w3-bar-item w3-button w3-ripple collapsed" onclick="dropdown(this)">
+		<span>Set Width</span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 3L5 7L9 3Z"/></svg></span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 7L5 3L9 7Z"/></svg></span>
+	</button>
+		<div class="w3-bar-block w3-light-grey">
+			<div class="w3-bar-item">
+				<input id="valWidth" class="w3-input w3-show-inline-block" style="width:80px" type="text" value="300" readonly>
+				<label for="valWidth" class="w3-right-align" style="width:50px">pixels</label>
+			</div>
+			<div class="w3-bar-item">
+				<input id="sliderWidth" type="range" oninput="updateWidth(this)" onchange="updateWidth(this)" style="width:170px" min="280" max="600" value="300" step="1">
+			</div>
+		</div>
+  <button class="w3-bar-item w3-button w3-ripple" onclick="gotoToday()">Go to Today</button>
+  <button class="w3-bar-item w3-button w3-ripple collapsed" onclick="dropdown(this)">
+		<span>Set Theme</span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 3L5 7L9 3Z"/></svg></span>
+		<span class="w3-right"><svg width="10" height="10"><path d="M1 7L5 3L9 7Z"/></svg></span>
+	</button>
+		<div class="w3-bar-block w3-light-grey">
+			<div class="w3-bar-item">
+				<input id="txtTheme" class="w3-input w3-border" type="text" placeholder="theme-color or index">
+			</div>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="setTheme()">Apply</button>
+			<button class="w3-bar-item w3-button w3-ripple" onclick="newTheme()">New Theme</button>
+		</div>
+</div>
+
+<div class="w3-main" style="margin-left:220px">
+	<div class="w3-container w3-padding w3-teal">
+		<button class="w3-button w3-ripple w3-xlarge w3-hide-large w3-left" style="margin:6px 8px 0px -16px" onclick="openSidebar()">
+			<svg width="18" height="23"><path d="M0 6L18 6L18 8L0 8Z M0 13L18 13L18 15L0 15Z M0 20L18 20L18 22L0 22Z"/></svg>
+		</button>
+		<h2>Hijri/Gregorian Datepicker Demo</h2>
+	</div>
+
+	<div class="w3-container w3-margin-top">
+		<div class="w3-container w3-margin-top">
+			<label for="gregDate">Gregorian Date</label>
+			<input id="gregDate" onclick="pickDate(event)" class="w3-input w3-border" type="text" placeholder="Click to pick a date...">
+		</div>
+		<div class="w3-container w3-margin-top">
+			<label for="hijrDate">Hijri Date</label>
+			<input id="hijrDate" onclick="pickDate(event)" class="w3-input w3-border" type="text" placeholder="Click to pick a date...">
+		</div>
+ </div>
+</div>
+
+<script type="text/javascript">
+let picker=new Datepicker();
+let pickElm=picker.getElement();
+let pLeft=200;
+let pWidth=300;
+pickElm.style.position='absolute';
+pickElm.style.left=pLeft+'px';
+pickElm.style.top='172px';
+picker.attachTo(document.body);
+
+picker.onPicked=function(){
+	let elgd=document.getElementById('gregDate');
+	let elhd=document.getElementById('hijrDate');
+	if(picker.getPickedDate() instanceof Date){
+		elgd.value=picker.getPickedDate().getDateString();
+		elhd.value=picker.getOppositePickedDate().getDateString()
+	}else{
+		elhd.value=picker.getPickedDate().getDateString();
+		elgd.value=picker.getOppositePickedDate().getDateString()
+	}
+};
+
+function openSidebar(){
+	document.getElementById("mySidebar").style.display = "block"
+}
+
+function closeSidebar(){
+	document.getElementById("mySidebar").style.display = "none"
+}
+
+function dropdown(el){
+	if(el.className.indexOf('expanded')==-1){
+		el.className=el.className.replace('collapsed','expanded');
+	}else{
+		el.className=el.className.replace('expanded','collapsed');
+	}
+}
+
+function selectLang(el){
+	el.children[0].checked=true;
+	picker.setLanguage(el.children[0].value)
+}
+
+function setFirstDay(fd){
+	picker.setFirstDayOfWeek(fd)
+}
+
+function setYear(){
+	let el=document.getElementById('valYear');
+	picker.setFullYear(el.value)
+}
+
+function setMonth(){
+	let el=document.getElementById('valMonth');
+	picker.setMonth(el.value)
+}
+
+function updateWidth(el){
+	pWidth=parseInt(el.value);
+	if(!fixWidth()){
+		document.getElementById('valWidth').value=pWidth;
+		picker.setWidth(pWidth)
+	}
+}
+
+function pickDate(ev){
+	ev=ev||window.event;
+	let el=ev.target||ev.srcElement;
+	pLeft=ev.pageX;
+	fixWidth();
+	pickElm.style.top=ev.pageY+'px';
+	picker.setHijriMode(el.id=='hijrDate');
+	picker.show()
+}
+
+function gotoToday(){
+	picker.today()
+}
+
+function setTheme(){
+	let el=document.getElementById('txtTheme');
+	let n=parseInt(el.value);
+	if(!isNaN(n))picker.setTheme(n);
+	else picker.setTheme(el.value)
+}
+
+function newTheme(){
+	picker.setTheme()
+}
+
+function fixWidth(){
+	let docWidth=document.body.offsetWidth;
+	let isFixed=false;
+	if(pLeft+pWidth>docWidth)pLeft=docWidth-pWidth;
+	if(docWidth>=992&&pLeft<200)pLeft=200;
+	else if(docWidth<992&&pLeft<0)pLeft=0;
+	if(pLeft+pWidth>docWidth){
+		pWidth=docWidth-pLeft;
+		picker.setWidth(pWidth);
+		document.getElementById('valWidth').value=pWidth;
+		document.getElementById('sliderWidth').value=pWidth;
+		isFixed=true
+	}
+	pickElm.style.left=pLeft+'px';
+	return isFixed
+}
+</script>
+</body>
+</html>
