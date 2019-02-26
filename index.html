@@ -9,20 +9,19 @@
 <meta name="description" content="">
 <meta name="robots" content="all">
 <meta name="copyright" content="ZulNs">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <!--link rel="icon" href="favicon.png" type="image/png" /-->
 <!--link rel="icon" href="favicon.ico" type="image/x-icon" /-->
 </head>
 <body>
-<link rel="stylesheet" href="../libs/w3css/w3.css"/>
-<script type="text/javascript" src="../libs/hijri-date.js"></script>
-<script type="text/javascript" src="../libs/datepicker.js"></script>
+<link rel="stylesheet" href="../w3css/w3.css"/>
 <style type="text/css">
 .w3-bar-item{border-left:6px solid transparent!important}
 .w3-bar-item:not(:disabled):hover{border-color:#f44336!important}
 .w3-bar-item:focus{border-color:#2196F3!important}
 .w3-bar-item.expanded{color:#fff;background-color:#616161}
 button.collapsed + div,button.collapsed>:nth-child(3),button.expanded>:nth-child(2){display:none!important}
+.w3-bar-item input[type=radio],.w3-bar-item label{cursor:pointer}
 </style>
 
 <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:220px;z-index:2" id="mySidebar">
@@ -109,6 +108,8 @@ button.collapsed + div,button.collapsed>:nth-child(3),button.expanded>:nth-child
 			<button class="w3-bar-item w3-button w3-ripple" onclick="setTheme()">Apply</button>
 			<button class="w3-bar-item w3-button w3-ripple" onclick="newTheme()">New Theme</button>
 		</div>
+  <a class="w3-bar-item w3-button w3-ripple" href="../Calendar.js/index.html">See My Calendar</a>
+  <a class="w3-bar-item w3-button w3-ripple" href="../Timepicker.js/index.html">See My Timepicker</a>
 </div>
 
 <div class="w3-main" style="margin-left:220px">
@@ -131,7 +132,10 @@ button.collapsed + div,button.collapsed>:nth-child(3),button.expanded>:nth-child
  </div>
 </div>
 
+<script type="text/javascript" src="../HijriDate.js/hijri-date.js"></script>
+<script type="text/javascript" src="datepicker.js"></script>
 <script type="text/javascript">
+'use strict';
 let picker=new Datepicker();
 let pickElm=picker.getElement();
 let pLeft=200;
@@ -203,7 +207,8 @@ function pickDate(ev){
 	fixWidth();
 	pickElm.style.top=ev.pageY+'px';
 	picker.setHijriMode(el.id=='hijrDate');
-	picker.show()
+	picker.show();
+	el.blur()
 }
 
 function gotoToday(){
