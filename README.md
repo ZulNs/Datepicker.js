@@ -6,3 +6,5 @@ Supported language:
 - English (en)
 - Arabic (ar)
 - Indonesian (id)
+
+[Demo](https://zulns.github.io/Datepicker.js/)
