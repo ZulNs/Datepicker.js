@@ -1,4 +1,4 @@
-# Hijri-Greg-Datepicker-JS-lib
+# Hijri/Gregorian Datepicker
 
 JavaScript library to creates Hijri/Gregorian Datepicker
 
