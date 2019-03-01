@@ -15,7 +15,7 @@ function Datepicker(isHijr,year,month,firstDay,lang,theme,width){
 	if(typeof HijriDate=='undefined')throw new Error('HijriDate() class required!');
 	const MIN_WIDTH=280,MAX_WIDTH=600;
 	let	dp=typeof this=='object'?this:window,gdate=new Date(),hdate=new HijriDate(),pgdate=new Date(),phdate=new HijriDate(),dispDate,pickDate,
-	tzOffset=Date.parse('01 Jan 1970'),isAttached=false,oldTheme,gridAni='zoom',isRTL=false,
+	tzOffset=Date.parse('01 Jan 1970'),oldTheme,gridAni='zoom',isRTL=false,
 	aboutElm,aboutTitleElm,aboutDateElm,aboutCloseBtnElm,
 	createElm=function(tagName,className,innerHTML){
 		let el=document.createElement(tagName);if(className)el.className=className;if(innerHTML)el.innerHTML=innerHTML;return el
@@ -173,7 +173,7 @@ function Datepicker(isHijr,year,month,firstDay,lang,theme,width){
 			if(el)el.className=el.className.replace('w3-'+oldTheme,'w3-'+theme)
 		}
 	};
-	dp.attachTo=function(el){if(el.appendChild&&!isAttached){el.appendChild(dpickElm);isAttached=true;return true}return false};
+	dp.attachTo=function(el){if(el.appendChild&&!dpickElm.parentNode){el.appendChild(dpickElm);return true}return false};
 	dp.getElement=function(){return dpickElm};
 	dp.getOppositePickedDate=function(){return getOppsPDate()};
 	dp.getPickedDate=function(){return pickDate};
