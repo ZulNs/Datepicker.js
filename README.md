@@ -1,6 +1,6 @@
 # JavaScript Hijri/Gregorian Datepicker Library
 
-![](https://zenodo.org/badge/171799050.svg)
+[![zenodo-badge](https://zenodo.org/badge/171799050.svg?)](https://zenodo.org/record/2600133)
 
 ## Demo
 Demo [here](https://zulns.github.io/Datepicker.js/).
