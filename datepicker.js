@@ -204,7 +204,7 @@ function Datepicker(isHijr,year,month,firstDay,lang,theme,width){
 				let d=dispDate.getDate();dispDate.setDate(1);
 				if(d>15)dispDate.setMonth(dispDate.getMonth()+1);
 			}
-			gridAni='zoom';updPicker();return true
+			recreateWdayTitle();gridAni='zoom';updPicker();return true
 		}return false
 	};
 	dp.setLanguage=function(l){
